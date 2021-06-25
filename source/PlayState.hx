@@ -164,6 +164,8 @@ class PlayState extends MusicBeatState
 
 	var halloweenBG:FlxSprite;
 	var isHalloween:Bool = false;
+	var bgshadow:FlxSprite;
+	var isUnderwater:Bool = false;
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
@@ -369,6 +371,7 @@ class PlayState extends MusicBeatState
 				case 4: stageCheck = 'limo';
 				case 5: if (songLowercase == 'winter-horrorland') {stageCheck = 'mallEvil';} else {stageCheck = 'mall';}
 				case 6: if (songLowercase == 'thorns') {stageCheck = 'schoolEvil';} else {stageCheck = 'school';}
+				case 7: stageCheck = 'submarine';
 				//i should check if its stage (but this is when none is found in chart anyway)
 			}
 		} else {stageCheck = SONG.stage;}
@@ -696,6 +699,53 @@ class PlayState extends MusicBeatState
 								add(waveSprite);
 								add(waveSpriteFG);
 						*/
+			}
+			case 'submarine':
+			{
+					defaultCamZoom = 0.8;
+					curStage = 'submarine';
+
+					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('wall', 'week7'));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					add(bg);
+
+
+					var bgbubbles:FlxSprite = new FlxSprite(-600, -200);
+					bgbubbles.frames = Paths.getSparrowAtlas('Bubbles');
+					bgbubbles.animation.addByPrefix('idle', 'Bubbles idle', 12, true);
+					bgbubbles.antialiasing = true;
+					bgbubbles.scrollFactor.set(0.9, 0.9);
+					bgbubbles.animation.play('idle');
+					add(bgbubbles);
+
+					bgshadow = new FlxSprite(-600, -200);
+					bgshadow.frames = Paths.getSparrowAtlas('Shadow');
+					bgshadow.animation.addByPrefix('idle', 'Shadow idle', 12, false);
+					bgshadow.animation.addByPrefix('nothing', 'Shadow nothing', 12, true);
+					bgshadow.antialiasing = false;
+					bgshadow.scrollFactor.set(0.9, 0.9);
+					bgshadow.animation.play('nothing');
+					add(bgshadow);
+
+					var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('ground', 'week7'));
+					stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+					stageFront.updateHitbox();
+					stageFront.antialiasing = true;
+					stageFront.scrollFactor.set(0.9, 0.9);
+					stageFront.active = false;
+					add(stageFront);
+
+					var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('wires', 'week7'));
+					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+					stageCurtains.updateHitbox();
+					stageCurtains.antialiasing = true;
+					stageCurtains.scrollFactor.set(1.3, 1.3);
+					stageCurtains.active = false;
+
+					add(stageCurtains);
+					isUnderwater = true;
 			}
 			case 'stage':
 				{
@@ -3636,6 +3686,14 @@ class PlayState extends MusicBeatState
 		gf.playAnim('scared', true);
 	}
 
+	function shadowPassBy():Void
+		{
+			bgshadow.animation.play('idle');
+	
+			lightningStrikeBeat = curBeat;
+			lightningOffset = FlxG.random.int(160, 480);
+		}
+
 	var danced:Bool = false;
 
 	override function stepHit()
@@ -3756,6 +3814,16 @@ class PlayState extends MusicBeatState
 				dad.playAnim('cheer', true);
 			}
 
+			if (curBeat == 248 && curSong.toLowerCase() == "underwater coffin")
+				{
+					dad.playAnim('Scream', true);
+				}
+		
+				if (curBeat == 253 && curSong.toLowerCase() == "underwater coffin")
+				{
+					dad.playAnim('idle');
+				}
+
 		switch (curStage)
 		{
 			case 'school':
@@ -3815,6 +3883,11 @@ class PlayState extends MusicBeatState
 				lightningStrikeShit();
 			}
 		}
+
+		if (isUnderwater && FlxG.random.bool(1000) && curBeat > lightningStrikeBeat + lightningOffset)
+			{
+				shadowPassBy();
+			}
 	}
 
 	var curLight:Int = 0;

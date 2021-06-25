@@ -498,7 +498,24 @@ class Character extends FlxSprite
 				addOffset("singDOWN-alt", -30, -27);
 
 				playAnim('idle');
-		}
+
+				case 'husk':
+					frames = Paths.getSparrowAtlas('characters/Husk');
+					animation.addByPrefix('idle', 'Husk idle', 24, true);
+					animation.addByPrefix('singUP', 'Husk sing up', 24, false);
+					animation.addByPrefix('singLEFT', 'Husk sing left', 24, false);
+					animation.addByPrefix('singRIGHT', 'Husk sing right', 24, false);
+					animation.addByPrefix('singDOWN', 'Husk sing down', 24, false);
+					animation.addByPrefix('Scream', 'Husk scream', 24, false);
+	
+					addOffset('idle');
+					addOffset("singUP");
+					addOffset("singRIGHT");
+					addOffset("singLEFT");
+					addOffset("singDOWN");
+					addOffset("Scream");
+					playAnim('idle');
+				}
 
 		dance();
 
