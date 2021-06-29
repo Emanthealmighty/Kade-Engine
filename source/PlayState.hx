@@ -377,12 +377,7 @@ class PlayState extends MusicBeatState
 		if (SONG.stage == null) {
 			switch(storyWeek)
 			{
-				case 2: stageCheck = 'halloween';
-				case 3: stageCheck = 'philly';
-				case 4: stageCheck = 'limo';
-				case 5: if (songLowercase == 'winter-horrorland') {stageCheck = 'mallEvil';} else {stageCheck = 'mall';}
-				case 6: if (songLowercase == 'thorns') {stageCheck = 'schoolEvil';} else {stageCheck = 'school';}
-				case 7: stageCheck = 'submarine';
+				case 0: stageCheck = 'submarine';
 				//i should check if its stage (but this is when none is found in chart anyway)
 			}
 		} else {stageCheck = SONG.stage;}
@@ -719,7 +714,7 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.8;
 					curStage = 'submarine';
 
-					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('wall', 'week7'));
+					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('wall', 'europa'));
 					bg.antialiasing = true;
 					bg.scrollFactor.set(0.9, 0.9);
 					bg.active = false;
@@ -727,7 +722,7 @@ class PlayState extends MusicBeatState
 
 
 					var bgbubbles:FlxSprite = new FlxSprite(-600, -200);
-					bgbubbles.frames = Paths.getSparrowAtlas('Bubbles');
+					bgbubbles.frames = Paths.getSparrowAtlas('Bubbles', 'europa');
 					bgbubbles.animation.addByPrefix('idle', 'Bubbles idle', 12, true);
 					bgbubbles.antialiasing = true;
 					bgbubbles.scrollFactor.set(0.9, 0.9);
@@ -735,7 +730,7 @@ class PlayState extends MusicBeatState
 					add(bgbubbles);
 
 					bgshadow = new FlxSprite(-600, -200);
-					bgshadow.frames = Paths.getSparrowAtlas('Shadow');
+					bgshadow.frames = Paths.getSparrowAtlas('Shadow', 'europa');
 					bgshadow.animation.addByPrefix('idle', 'Shadow idle', 12, false);
 					bgshadow.animation.addByPrefix('nothing', 'Shadow nothing', 12, true);
 					bgshadow.antialiasing = false;
@@ -743,7 +738,7 @@ class PlayState extends MusicBeatState
 					bgshadow.animation.play('nothing');
 					add(bgshadow);
 
-					var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('ground', 'week7'));
+					var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('ground', 'europa'));
 					stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 					stageFront.updateHitbox();
 					stageFront.antialiasing = true;
@@ -751,7 +746,7 @@ class PlayState extends MusicBeatState
 					stageFront.active = false;
 					add(stageFront);
 
-					var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('wires', 'week7'));
+					var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('wires', 'europa'));
 					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 					stageCurtains.updateHitbox();
 					stageCurtains.antialiasing = true;
