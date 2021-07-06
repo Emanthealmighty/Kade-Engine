@@ -321,7 +321,8 @@ class StoryMenuState extends MusicBeatState
 			PlayState.campaignScore = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
+				FlxG.sound.music.stop();
+				LoadingState.loadAndSwitchState(new VideoState("assets/videos/cutscene.webm", new PlayState()));
 			});
 		}
 	}

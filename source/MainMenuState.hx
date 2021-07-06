@@ -121,6 +121,11 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
+		var funny:FlxText = new FlxText(1100, FlxG.height - 18, 0, "65 77 79 71 85 83", 12);
+		funny.scrollFactor.set();
+		funny.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(funny);
+
 		// NG.core.calls.event.logEvent('swag').send();
 
 
